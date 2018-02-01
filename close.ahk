@@ -1,8 +1,9 @@
 ﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 
 RegRead, regValue, HKEY_CURRENT_USER, Software\TortoiseGit, Diff
-
-if(SubStr(regValue,1,1)=="""")
+if(regValue ~="^#.+" || StrLen(regValue)==0)
+	path:= "TortoiseGitMerge.exe"
+else if(SubStr(regValue,1,1)=="""")
 {
 	index:=InStr(regValue, """", true, 2)
 	path:= SubStr(regValue, 2, index-2)
